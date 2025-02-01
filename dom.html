@@ -9,19 +9,24 @@
 <body>
     <button class="btn1">버튼1</button>
     <button class="btn2">버튼2</button>
-    <button>버튼1</button>
-    <button>버튼2</button>
+    
     <script>
         let btn = $('button.btn1');
+        let btn2 = $('button.btn2');
         btn.click(function(){
             let name = prompt('이름을 입력해주세요 : ');
             //console.log($(this).index()); //여기서 this는 클릭한 버튼 그 자체를 의미한다
             console.log(`${name}님 환영합니다`);
         });
-        let btn2 = $('button.btn2');
-        btn.click(function(){
-            let name = prompt('숫자를 입력해주세요 : ');
-            console.log(`${name}님 환영합니다`);
+
+     
+        btn2.click(function(){
+            let age = prompt('숫자를 입력해주세요 : ');
+            if(age % 2 === 0 ){
+                alert('짝수입니다.');
+            }else{
+                alert('홀수입니다.');
+            }   
         });
 
 
