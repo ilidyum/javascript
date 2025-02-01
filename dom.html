@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>  
+</head>
+<body>
+    <button class="btn1">버튼1</button>
+    <button class="btn2">버튼2</button>
+    <button>버튼1</button>
+    <button>버튼2</button>
+    <script>
+        let btn = $('button.btn1');
+        btn.click(function(){
+            let name = prompt('이름을 입력해주세요 : ');
+            //console.log($(this).index()); //여기서 this는 클릭한 버튼 그 자체를 의미한다
+            console.log(`${name}님 환영합니다`);
+        });
+        let btn2 = $('button.btn2');
+        btn.click(function(){
+            let name = prompt('숫자를 입력해주세요 : ');
+            console.log(`${name}님 환영합니다`);
+        });
+
+
+        //버튼 1을 클랙했을때
+        // 이름을 입력받고
+        // 콘솔로 이름님 환영합니다
+        // 라고 나올 수 있게 해보세요!
+
+        //버튼 2을 클릭했을때
+        // 숫자를 입력받고 숫자가 짝수인지 홀수읹지
+        //alert로 반환해주세요!
+    </script>
+</body>
+</html>
