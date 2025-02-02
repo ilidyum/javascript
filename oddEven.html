@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link role="icon" href="">
+
+    <title>홀짝게임</title>
+    <script src="./jquery.js"></script>
+    <style>
+        button.try{
+            display: none;
+        }
+        button.try.show{ /* show클래스가 나왔을때 하겠다는 뜻 이런건 자바스크립트로 컨트롤 하면 됨*/
+            display: inline;
+        }
+        h3{
+            color: #000
+        }
+        h3.remove{ /* remove 클래스가 나왔을때 하겠다는 뜻 이런건 자바스크립트로 컨트롤 하면 됨*/
+            color: transparent
+        }
+    </style>
+</head>
+<body>
+    <h1>홀수 짝수 맞추기 게임</h1>
+    <button>홀수</button>
+    <button>짝수</button>
+    <h3>메시지</h3>
+    <button class="try">재도전</button> <!--이렇게 인라인스타일로 숨겨서 하기 근데 이렇게 하지 말자 우선순위가 너무 높아서 다른 사람이 css로 수정하기 어렵다 이렇게 해야지 css로 바꾸는게 가능하니 이렇게 하자-->
+    <script>
+        let num = parseInt(Math.random()*10) + 1;
+        let oddEven = '';
+
+
+        const getNum = function(randomNum){ //이렇게 변수로 빼버리면 const 사용으로 접근제어를 할수 있다
+            if(randomNum % 2 === 0){
+                oddEven = '짝수';
+            }else{
+                oddEven = '홀수';
+            }
+            
+        }
+        
+        // function getNum(){ 이렇게 정석적인 방법으로도 함수 선언이 가능하다
+        //     let num = parseInt(Math.random()*10) + 1;
+        //     let addEven = '';
+        //     console.log(num);
+        //     if(num % 2 === 0){
+        //         addEven = '짝수';
+        //     }else{
+        //         addEven = '홀수';
+        //     }
+            
+        // }
+
+        getNum(num);
+        $('button').click(function(){
+            if(!$(this).hasClass('try')){
+                $('button').attr('disabled', true);
+            } 
+            let now = $(this).text();
+            $('h3').removeClass('remove');
+            if(oddEven === now){
+                $('h3').text('정답입니다!');
+                $('button.try').removeClass('show');
+            } else{
+                $('h3').text('오답입니다!');
+                $('button.try').addClass('show'); //이렇게 자바 스크립트로 컨트롤 하기 이렇게 해야지 css로 바꾸는게 가능하니 이렇게 하자
+                $('button.try').attr('disabled',false);
+            }
+            //$('h3').removeClass('remove');
+        });
+
+
+        $('button.try').click(function(){
+            $('button').attr('disabled',false);
+            $(this).removeClass('show');
+            num = parseInt(Math.random()*10) + 1;
+            getNum(num);
+            $('h3').addClass('remove');
+
+
+        });
+
+        // 1. 버튼 두개 홀짝 선택
+        // 2. 랜덤 숫자 생성
+        // 3. 랜덤이 홀수인지 짝수인지
+        // 4. 비교
+        // 5. 결과 출력
+        // 6. 재도전 버튼 발생
+
+        //우선 이렇게 로직부터 짜고 하자
+
+
+
+
+
+    </script>
+</body>
+</html>
