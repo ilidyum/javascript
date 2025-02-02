@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>math.html</title>
+    <script src="./jquery.js"></script> 
+</head>
+<body>
+    <h1>랜덤 숫자 맞추기!</h1>
+    <button class = "strat">시작!</button>
+    <input type="number" disabled>
+    <button class="check">체크!</button>
+    <h3>♥<span>10</span></h3> 
+    <h4></h4>
+    <script>
+        //span 쓰는 이유는 값이 변경될수 있기 때문이다
+        //span은 뜻이 없다 인라인 개의 div
+
+
+        // math.random은 무조건 * 숫자 개수로 생각하면 됩니다.
+        // parseInt로 정수화 시킨 숫자 + 시작 숫자를 의미합니다.
+        // ex : console.log(parseInt(Math.random()*55) + 1);
+        // 1부터 55까지
+
+// 준비물
+// 1. 입력 받는 input
+// 2. 시작버튼 || 재도전 버튼
+// 3. 라이프 갯수를 알려주는 무언가
+// 4. 결과 메세지를 알수있는 무언가
+
+
+
+        // 인터넷에서 게임을 만들거에요!
+        // 1부터 100까지 숫자를 생각해서 숫자를 맞추는 게임
+        // 도전 기회는 10번!
+        // 유저가 들어와서 시작 버튼 누른다
+        // input 활성화
+        // 1. 유저로 부터 입력받고 반환값 변수에 저장
+        // 2. 랜덤 돌리고 반환값을 변수에 저장
+        // 3. switch case 돌려 유저랑 비교
+        // 4. 랜덤 숫자보다 유저의 숫자가 크면 더 작은 숫자를 유도한다!
+        // 5. 작으면 큰 숫자를 유도한다.
+        // 4,5번이 한번씩 발생할때마다 life--
+        // 6. 숫자가 같다면 당첨! 후 얼마만에 맞췄는지 알려준다. 
+        // 7. 재 도저을 할 수 있는 버튼을 클릭한다.
+        // 요론걸 로직 이라고 한다
+
+
+        let [num,life] = [0,10]; //전역변수로 만들기 위해 선언을 밖에서 한다 (전역변수는 맨 상단에 올려놓는게 국룰  참고로 변수는 전역,지역,정적 변수로 나뉜다)그리고 리소스 문제로 전역으로 컨트롤 가능하면 전역으로 컨트롤 해서 재활용 하며 돌려쓰자
+        // javascript는 이렇게도 한꺼번에 선언 가능하다.
+
+
+        $('button.strat').click(function(){
+            // console.log($(this).text()); //jquery는 비어있으면 값 가져오고 값을 입력하면 그 값으로 바꾼다(치환한다) 그렇게 구별이 가능하다
+
+
+
+
+
+
+
+
+
+            life = 10;
+            $('h3>span').text(life);
+            $('input').val(0) //attr으로 하면 불러올수 있긴 한데 세팅이 아마 안될 것이다 그러니 val로 하자
+            $('button.check').attr('disabled',false)
+            $('h4').text('');
+
+
+
+            num = parseInt(Math.random()*100) + 1;
+           $('input').attr('disabled',false);
+            $(this).attr('disabled', true) //여기서 button.start로 해도 되지만 좀 보기 불편하니 클릭한 이것을 말하는 this로 하자 이미 클릭조건($('button.strat').click(function(){)을 붙였으니 this를 써도 된다
+        });
+        $('button.check').click(function(){
+            let userNum = $('input').val()*1  // jquery의 val 함수는 input에 입력된 값을 문자로 반환시킨다 그러니 이번 코드에서는 *1로 숫자로 형 변환을 해주자
+            console.log(userNum);
+            console.log(`유저가 입력한 값 : ${userNum} 컴퓨터 값: ${num}`);
+       
+
+        //문제, 만약 유저 값이랑 컴퓨터 값이랑 비교했을때
+        // 컴퓨터크면: 더 큰 값을 입력해주세요! 가 콘솔로 출력
+        // 컴퓨터 작으면 : 더 작은 값을 입력해주세요! 가 콘솔로 출력
+        // 컴퓨터와 같으면 : 정답입니다 가 콘솔로 출력
+        // 만들어보세요~!
+
+        if(userNum < num){
+            $('h4').text('더 큰 값을 입력해주세요!'); //text함수와 html함수의 차이는 text는 태그 사용이 불가하지만 html은 태그 사용이 가능하다
+            life--;
+        } else if(userNum > num){
+            $('h4').text('더 작은 값을 입력해주세요!');
+            life--;
+        } else {
+            $('h4').text('정답입니다');
+            console.log(`남은 목숨 : ${life}`);
+        }
+        $('h3>span').text(`${life}`); //css랑 nth 하위요소 검색이 똑같은걸 알수 있다   요로케 반복되는 요소를 추상화 해서 코드를 줄일수 있다
+
+        if(life === 0){
+            $('input').attr('disabled',true);
+            $('button.check').attr('disabled',true);
+            $('button.strat').attr('disabled',false);
+            $('button.strat').text('재도전');
+            $('h4').text('실패했습니다ㅠㅠ 재도전 해주셔여!');
+
+
+        }
+        
+
+
+
+        });
+        
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // attr은 속성이란 뜻의 어트리뷰트의 줄임말 여기선 input 타입이랑 디사이블드 그 뭐시기 구문을 말한다
+        // attr은 첫번째 값만 넣음 그냥 원래 있던 예를 반환해주고 두번째 값은 boolen형으로 입력하면 그걸로 속성을 끄거나 킬 수 있고 두번재 값에 타입을 입력해 타입을 변경 가능하다
+        // attr으로 안적었던 새로운 속성을 활성화 할수 있다
+        // ex)     $(this).attr('disabled', true)
+// 
+//              attr ( )
+//attr 은 엘리먼트의 속성 값을 가져오거나 변경할 수 있는 함수이다.
+//하나의 인자를 주면 해당 속성 값만을 조회하고 두 개를 주면 해당 속성 값을 변경한다.
+// 
+// 
+// 
+//         
+
+
+    </script>
+</body>
+</html>
