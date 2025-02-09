@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thumbnail.html</title>
+    <script src="./jquery.js"></script>
+    <style>
+        div.wrap{
+            width: 80%;
+            margin: 0 auto;
+        }
+        div.mainImg{
+            width: 100%;
+            height: 500px;
+            background-color: #ccc;
+            /* bgr tab*/
+            background-repeat: no-repeat;
+            /*bgp tab*/
+            background-position: center;
+            /*bgz tab*/
+            background-size: cover;
+        }
+        ul{
+            display: flex;
+            list-style: none;
+            justify-content: space-between;
+            padding: 0;
+        }
+        li{
+            width: calc(100% / 5 - 10px);
+            height: 100px;
+            background-color: #fc0;
+            cursor: pointer;
+            /* bgr tab*/
+            background-repeat: no-repeat;
+            /*bgp tab*/
+            background-position: center;
+            /*bgz tab*/
+            background-size: cover;
+        }
+        li.i1{
+            background-image: url('./image/slide1.jpg');
+        }
+        li.i2{
+            background-image: url('./image/slide2.jpg');
+        }
+        li.i3{
+            background-image: url('./image/slide3.jpg');
+        }
+        li.i4{
+            background-image: url('./image/slide4.jpg');
+        }
+        li.i5{
+            background-image: url('./image/slide5.jpg');
+            /* border-style: hidden; */
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="mainImg"></div>
+        <ul>
+            <li class="i1"></li>
+            <li class="i2"></li>
+            <li class="i3"></li>
+            <li class="i4"></li>
+            <li class="i5"></li>
+        </ul>
+    </div>    
+    <script>
+
+        // li들을 들고올수 있도록 dom탐색해보세요!
+    
+        let li = $('li');
+        let mainImg = $('.mainImg');
+        mainImg.css('background-image',li.eq(0).css('background-image'));
+        li.eq(0).css('border','solid');
+        li.click(function(){
+
+            li.css('borderStyle','hidden');
+            $(this).css('border','solid');
+            mainImg.css('background-image',$(this).css('background-image'));
+        });
+
+        
+
+        console.log(li.eq(0).css('background-image')); //뒤에 아무것도 안쓰면 정보 들고옴
+    </script>
+</body>
+</html>

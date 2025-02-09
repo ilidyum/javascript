@@ -107,13 +107,36 @@
         //annie309409 리포지토리
         const btnAdd = $('.add-btn');
         const todoList = $('.todo-list');
+        const del = ('delete-btn');
         btnAdd.click(function(){
-            let todoItem = $('.todo-item').first().clone(); //클론을 그냥 다 하면 올라갈때마다 2개3개''' 이렇게 늘어나니 first를 써서 한개식만 추가되도록 한다
+            let todoItem = $('.todo-item').first().clone(treu); //클론을 그냥 다 하면 올라갈때마다 2개3개''' 이렇게 늘어나니 first를 써서 한개식만 추가되도록 한다
             let val = $('input').val();
             todoItem.children('.todo-text').text(val);
             todoList.prepend(todoItem); // prepend는 append와는 다른게 위로 올라간다
-            
+            });
+
+            del.click(function(){
+                $(this).parent().remove //여기서 this는 모든 del이 아닌 클릭한 del을 말하는 거다
+            });
+
+
+
+
+
+
+
+
+
+
+            // 1. jquery $ == dom
+            // 2. clone, remove (dom || utml)
+            // clone : 이미 있는 ui가 반복될때
+            // > 게시판에 게시글 같은건
             // input에 입력받은 값을 세팅해서 추가되도록 만들어보세요!
+            // 4. remove : 이미있는 ui 중 삭제가 필요할때
+            // 5. clone을 했을때, 순서는 먼저 dom을 전체다 완벽하게 세팅 한 후
+            // 6. append 끼워넣어줍니다 : 뒤에
+            // 7. preppend : 앞에
          
         });
     </script>
