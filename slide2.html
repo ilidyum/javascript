@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        /* *은 전체선택 */
+
+        .slideWrap{
+            width: 50%;
+            margin: 0 auto;
+            outline: 5px solid red;
+            position: relative;
+            /* absolute를 한 요소 기준이 되는 상위 요소는 relative주기 */
+        }
+
+        .slideGr{
+            width: 300%;   /*  12(gr의 li 수) * 1/3(wrap) = 4(wrap 안에 들어가는 li 수)  */
+            display: flex;
+            /* 블럭 요소라 자꾸 쌓이니 flex정렬로 가로로 배열해주자 */
+        }
+        .slideGr li{
+            width: calc(100% / 12);
+            height: 250px;
+            line-height: 250px;
+            font-size: 72px;
+            text-align: center;
+            border: 1px solid #ccc;
+            
+        }
+
+        .btns{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            height: 50px;
+
+            /* 가운데로 만들기 */
+            margin: auto;
+            top: 0;
+            bottom: 0;
+
+        }
+        .btns>div{
+            cursor: pointer;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideWrap">
+        <ul class="slideGr">
+            <li>012</li>
+            <li>01</li>
+            <li>02</li>
+            <li>03</li>
+            <li>04</li>
+            <li>05</li>
+            <li>06</li>
+            <li>07</li>
+            <li>08</li>
+            <li>09</li>
+            <li>010</li>
+            <li>011</li>
+        </ul>
+        <div class="btns">
+            <div class="left">◀</div>
+            <div class="rigth">▶</div>
+        </div>
+    </div>
+    <script>
+        let slideGr = $('.slideGr');
+        let btn = $('.btns>div')
+        slideGr.css('margin-left','-25%');
+    
+        btn.click(function(){
+            let left = $(this).hasClass('left');
+
+            if(left){      
+            slideGr.animate({
+                marginLeft: `-50%`
+            },500, function(){
+                let art = slideGr.children().first();
+                slideGr.append(art);
+                slideGr.css({marginLeft:'-25%'});
+            })
+            } else{
+                slideGr.animate({
+                    marginLeft: `0%`
+                },500,function(){
+                    let ar = slideGr.children().last();
+                    slideGr.prepend(ar);
+                    slideGr.css({marginLeft:'-25%'})
+                })
+            }
+
+        })
+
+
+
+
+        //dom.length = 돔 안의 총 개수
+
+    </script>
+</body>
+</html>
