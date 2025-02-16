@@ -107,6 +107,7 @@
     <div class="card-container">
         <div class="card" id="card">
             <article>
+
                 <img src="./image/slide1.jpg" alt="카드 이미지">
                 <h2>제목</h2>
                 <p>내용</p>
@@ -145,7 +146,9 @@
             let artclone = art.clone();
             artclone.children('h2').text(e.title);
             artclone.children('p').text(e.detail);
-            artclone.children('img src').text(e.img);
+            artclone.children('img').attr('src',e.img);
+            
+
             card.append(artclone);
         })
         art.remove();
@@ -153,35 +156,47 @@
         card.css('width', `${news.length * 100}%`);
         pg.children('span').last().text(news.length);
         
-     
-       
-        btn.click(function(){
-            let prve = $(this).hasClass('prev');
+
+        function slide(prve){
             if(prve){
                 if(num > 0){
                     num--;
-                    
                 }
                 console.log(num);
             }else{
                 if(num<news.length - 1){
                     num++;
                 }
-                
                 console.log(num);
             }
-
-            
-            card.stop().animate({ //stop로 pg랑 속도 맞추기
-                    marginLeft: `-${num*100}%`
-                },500)
+            card.stop().animate({marginLeft: `-${num*100}%`},500) //stop로 pg랑 속도 맞추기
                 pg.children('span').first().text(num+1);
+        }
+     
+       
+        btn.click(function(){
+            let prve = $(this).hasClass('prev');
+            slide(prve);
         })
 
-        
-
         contianer.on('swipeleft',function(){
-            alert('left~!!');
+            slide(false);
+        })
+        contianer.on('swiperight',function(){
+            slide(true);
+        })
+
+
+        let like = $('.like');
+        like.click(function(){
+            $(this).toggleClass('show');
+            tolike = $(this).hasClass('show')
+            if(tolike){
+                $(this).text('★');
+            } else{
+                $(this).text('☆');
+            }
+
         })
 
 
