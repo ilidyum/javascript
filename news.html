@@ -154,7 +154,7 @@
         })
 
         news.forEach(function(e,i){
-            let artclone = art.clone(true); //true로 이벤트까지 복사 그래서 원본art가 지워져도 이벤트 까지 복사되기 때문에 clone 에서도 like가 먹힌다
+            let artclone = art.clone(true); //true로 이벤트까지 복사 그래서 원본art가 지워져도 이벤트 까지 복사됬기 때문에 clone 에서도 like가 먹힌다
             artclone.children('h2').text(e.title);
             artclone.children('p').text(e.detail);
             artclone.children('img').attr('src',e.img);
