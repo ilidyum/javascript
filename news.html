@@ -107,7 +107,6 @@
     <div class="card-container">
         <div class="card" id="card">
             <article>
-
                 <img src="./image/slide1.jpg" alt="카드 이미지">
                 <h2>제목</h2>
                 <p>내용</p>
@@ -135,13 +134,13 @@
         ];
 
 
+    
         let art = $('article');
         let card = $('.card');
         let btn = $('.card-nav>button');
         let pg = $('.pg')
         let num = 0;
         let contianer = $('.card-container');
-
         news.forEach(function(e,i){
             let artclone = art.clone();
             artclone.children('h2').text(e.title);
@@ -152,6 +151,8 @@
             card.append(artclone);
         })
         art.remove();
+        
+        let like = $('.like');//처음부터 돔 탐색하면 복사가 안된 like 하나만 탐지되니 복사가 전부 완료된 후 변수를 선언해 돔 탐색을 한다
         
         card.css('width', `${news.length * 100}%`);
         pg.children('span').last().text(news.length);
@@ -187,7 +188,6 @@
         })
 
 
-        let like = $('.like');
         like.click(function(){
             $(this).toggleClass('show');
             tolike = $(this).hasClass('show')
