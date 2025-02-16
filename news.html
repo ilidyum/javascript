@@ -133,16 +133,28 @@
             { title: "휴머노이드 로봇의 상용화", detail: "최근 휴머노이드 로봇이 다양한 산업 분야에서 도입되면서 상용화가 가속화되고 있습니다. 제조업과 서비스업에서 인간을 보조하는 역할을 하고 있으며, AI와 결합하여 더욱 정교한 작업을 수행할 수 있게 되었습니다. 하지만, 로봇이 인간의 일자리를 대체할 가능성에 대한 우려도 커지고 있으며, 이에 대한 사회적 논의가 필요합니다.", img: "./image/slide10.jpg" }
         ];
 
-
-    
+   
+        let like = $('.like');
         let art = $('article');
         let card = $('.card');
         let btn = $('.card-nav>button');
         let pg = $('.pg')
         let num = 0;
         let contianer = $('.card-container');
+
+
+        like.click(function(){
+            $(this).toggleClass('show');
+            tolike = $(this).hasClass('show')
+            if(tolike){
+                $(this).text('★');
+            } else{
+                $(this).text('☆');
+            }
+        })
+
         news.forEach(function(e,i){
-            let artclone = art.clone();
+            let artclone = art.clone(true); //true로 이벤트까지 복사 그래서 원본art가 지워져도 이벤트 까지 복사되기 때문에 clone 에서도 like가 먹힌다
             artclone.children('h2').text(e.title);
             artclone.children('p').text(e.detail);
             artclone.children('img').attr('src',e.img);
@@ -152,8 +164,7 @@
         })
         art.remove();
         
-        let like = $('.like');//처음부터 돔 탐색하면 복사가 안된 like 하나만 탐지되니 복사가 전부 완료된 후 변수를 선언해 돔 탐색을 한다
-        
+      
         card.css('width', `${news.length * 100}%`);
         pg.children('span').last().text(news.length);
         
@@ -188,16 +199,7 @@
         })
 
 
-        like.click(function(){
-            $(this).toggleClass('show');
-            tolike = $(this).hasClass('show')
-            if(tolike){
-                $(this).text('★');
-            } else{
-                $(this).text('☆');
-            }
-
-        })
+     
 
 
 
