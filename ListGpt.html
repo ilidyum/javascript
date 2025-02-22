@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>투두리스트</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .todo-container {
+      width: 100%;
+      max-width: 500px;
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      max-height: 500px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      /* 나갔을때 스크롤로 하게 해준다는 뜻 */
+    }
+
+    .todo-container h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .todo-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .todo-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f9f9f9;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .todo-item input{
+        width: 150px;
+        background-color:  white;
+    }
+
+    .todo-item input:disabled{     
+        border: none;
+        background-color: transparent;
+    }
+    /* disabled일때 이렇게 하겠다는 뜻 */
+
+    .todo-item button {
+      background-color: #e7e7e7;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .todo-item button:hover {
+      background-color: #dcdcdc;
+    }
+
+    .input-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .input-container input {
+      padding: 10px;
+      width: 75%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .input-container button {
+      padding: 10px;
+      width: 20%;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .input-container button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-container">
+    <h1>TODO LIST</h1>
+    <ul class="todo-list">
+      <li class="todo-item">
+        <input type="text" value="샘플 항목" disabled class="addedInp" ></input>
+        <div>
+          <button class="mod">수정</button>
+          <button class="del">삭제</button>
+        </div>
+      </li>
+    </ul>
+
+    <div class="input-container">
+      <input type="text" placeholder="할 일을 입력하세요">
+      <button class="todo-button">추가</button>
+    </div>
+  </div>
+
+  <script>
+    //돔 탐색
+    let add = document.querySelector('.todo-button');
+    let inpc = document.querySelector('.input-container');
+    let inp = inpc.querySelector('input')
+    let itm = document.querySelector('.todo-item');
+    let todoList = document.querySelector('.todo-list');
+    //
+    let modOrdel = function(state, dom, self){
+        if(state === 'del'){
+            dom.remove();
+        } else{
+            let st = self.innerText; //innerText도 값을 안쓰면 변수와 같은 원리로 값을 가져온다
+            if(st === '확인'){
+                dom.disabled=true;
+                self.innerText = '수정'; //토글
+            }else{
+                dom.disabled=false;
+                self.innerText = '확인';
+            }
+        }
+    }
+
+
+    //추가 버튼 클릭했을때
+    add.addEventListener('click',function(){
+        let val = inp.value;
+        
+        if(val == ''){
+            alert('잘못된 값이 입력되었습니다')
+        } else{
+            let newItem = itm.cloneNode(true); //js는 true했을때 자식요소도 복사
+            let sp = newItem.querySelector('.addedInp');
+            console.log(sp);
+            sp.value = val;
+            todoList.prepend(newItem); 
+            inp.value = '';
+            let mod = newItem.querySelector('.mod')
+            let del = newItem.querySelector('.del')
+            mod.addEventListener('click',function(){ //동시에 나와서 파라미터를 못받으니까 이런 형태로 써야한다
+                modOrdel('mod',sp, this);
+
+            });
+            del.addEventListener('click',function(){
+                modOrdel('del', newItem);
+            });
+            
+        }
+        // 원래 click 안에 click을
+        //  넣으면 안되지만 이런 케이스는 어쩔수 없다
+    })
+
+    itm.remove();
+
+
+
+
+  </script>
+</body>
+</html>
+
+
+
+<!-- 투두리스트를 만들건데 기능은 추가,삭제,수정이있어 리스트 안쪽에 한개 샘플로 이미 올라온 리스트를 넣어줘 js작업은 제외해 html과 css를 주는데 ,html파일 한개 안에 다 넣어줘 ticktapcode -->
