@@ -137,9 +137,10 @@
         }
 
         btn.forEach(function(e){
-            if(flag == true){
             e.addEventListener('click',function(){
+   
                 if(this.id != 'refresh'){
+                  if(flag === true){
                     clearInterval(imgs);
                     mn.setAttribute('src', `./${com[ch]}.png`);
                     let me = this.innerText;
@@ -166,16 +167,18 @@
                         ms.innerText = scoreC;
                         csss.innerText = score;
                         flag = false;
-                    }        
+                    }    
+                  }
+                   
                 }else{
-                    
                     clearInterval(imgs) //더 빠르게 되는 오류 방지
                     newGame()
                     flag = true;
                     re.innerText = ''
                 }
-            })}
-        })
+            })
+          }
+        )
 
 
 // setInterval 을 멈추려면 변수에다가 넣어야 한다
