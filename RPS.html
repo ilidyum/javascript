@@ -140,12 +140,13 @@
             e.addEventListener('click',function(){
    
                 if(this.id != 'refresh'){
-                  if(flag === true){
+                  if(flag){ //어차피 참이니 이렇게만 쓰자
                     clearInterval(imgs);
                     mn.setAttribute('src', `./${com[ch]}.png`);
                     let me = this.innerText;
                     let cu = com[ch]
                     console.log(me);
+                    flag = false; //쌤
 
           
                     if(me === cu){
@@ -166,7 +167,7 @@
                         }
                         ms.innerText = scoreC;
                         csss.innerText = score;
-                        flag = false;
+                        //flag = false; 나
                     }    
                   }
                    

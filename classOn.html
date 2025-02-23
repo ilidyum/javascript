@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>버튼</button>
+    <script>
+        let btn = document.querySelector('button'); //클래스 중복 넣기 방지
+        btn.addEventListener('click', function(){
+            (!this.classList.contains('active'))? //사망 연산자는 꼭 else를 넣어야 한다 안넣으면 오류남
+                this.className += ' active' : '';  //:  = 아니면(else)
+            
+
+
+
+        })//contains는 includes와는 다르게 배열에 널수 있다 
+        //includes는 String 전용 contains는 배열 전용
+    </script>
+</body>
+</html>
